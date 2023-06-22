@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator MDA - fara negatii</title>
+  <style>
+    .container {
+      width: 400px;
+      margin: 50px auto;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 5px;
+    }
+
+    button {
+      padding: 10px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+	
+	li {
+	color: orange;
+	}
+	
+	.legenda {
+	border: 2px solid green;
+	}
+  </style>
+  <meta name="author" content="Alex Vlasie">
+</head>
+<body>
+  <div class="container">
+    <div class="input-group">
+      <label for="piese">Cost piese (lei):</label>
+      <input type="text" id="piese" oninput="updateReparatiiValue()">
+    </div>
+
+    <div class="input-group">
+      <label for="manopera">Cost manoperă (lei):</label>
+      <input type="text" id="manopera" oninput="updateReparatiiValue()">
+    </div>
+
+    <div class="input-group">
+      <label for="transport">Cost transport (lei):</label>
+      <input type="text" id="transport" oninput="updateReparatiiValue()">
+    </div>
+
+    <div class="input-group">
+      <label for="reparatii">Valoarea reparației (lei):</label>
+      <input type="text" id="reparatii" readonly>
+    </div>
+
+    <div class="input-group">
+      <label for="produs">Valoarea produsului (lei):</label>
+      <input type="text" id="produs">
+    </div>
+
+    <div class="input-group">
+      <label for="data">Data achiziției:</label>
+      <input type="date" id="data">
+    </div>
+
+    <button onclick="calculeaza()">Calculează</button>
+
+    <div id="result"></div>
+	
+	<div class="legenda">
+		<ul>
+			<li>1-2 ani-50%</li>
+			<li>2 ani-2 ani jumatate - 50-60%</li>
+			<li>2 ani jumatate-3 ani -  60-70%</li>
+			<li>3 ani-3 ani jumatate - 70%-80%</li>
+			<li>3 ani jumatate -4 ani - 80%-100%</li>
+		</ul>
+	</div>
+  </div>
+
+  <script>
+    function updateReparatiiValue() {
+      var piese = parseFloat(document.getElementById('piese').value);
+      var manopera = parseFloat(document.getElementById('manopera').value);
+      var transport = parseFloat(document.getElementById('transport').value);
+
+      var reparatiiValue = (isNaN(piese) ? 0 : piese) + (isNaN(manopera) ? 0 : manopera) + (isNaN(transport) ? 0 : transport);
+      document.getElementById('reparatii').value = reparatiiValue.toFixed(2);
+    }
+
+    function calculeaza() {
+      var reparatii = parseFloat(document.getElementById('reparatii').value);
+      var produs = parseFloat(document.getElementById('produs').value);
+      var data = document.getElementById('data').value;
+
+      if (isNaN(reparatii) || isNaN(produs)) {
+        alert('Te rog introdu valori numerice valide pentru câmpurile de costuri și valoarea produsului.');
+        return;
+      }
+
+      var procent = (reparatii / produs) * 100;
+      var procentRotunjit = Math.round(procent * 10) / 10;
+      var resultDiv = document.getElementById('result');
+
+      var currentDate = new Date();
+      var selectedDate = new Date(data);
+      var yearsDiff = currentDate.getFullYear() - selectedDate.getFullYear();
+      var monthsDiff = currentDate.getMonth() - selectedDate.getMonth();
+      var totalMonthsDiff = yearsDiff * 12 + monthsDiff;
+
+      var perioadaText = '';
+      if (totalMonthsDiff === 1) {
+        perioadaText = '1 lună';
+      } else if (totalMonthsDiff > 1) {
+        var years = Math.floor(totalMonthsDiff / 12);
+        var months = totalMonthsDiff % 12;
+
+        if (years === 1 && months === 0) {
+          perioadaText = '1 an';
+        } else if (years === 1 && months === 1) {
+          perioadaText = '1 an și 1 lună';
+        } else if (years === 1 && months > 1) {
+          perioadaText = '1 an și ' + months + ' luni';
+        } else if (years > 1 && months === 0) {
+          perioadaText = years + ' ani';
+        } else if (years > 1 && months === 1) {
+          perioadaText = years + ' ani și 1 lună';
+        } else {
+          perioadaText = years + ' ani și ' + months + ' luni';
+        }
+      }
+
+      var sumaCosturi = piese + manopera + transport;
+      resultDiv.innerHTML = 'Procent: ' + procentRotunjit + '% | Data: ' + data + ' | Perioada: ' + perioadaText;
+
+      if (!isNaN(sumaCosturi)) {
+        resultDiv.innerHTML += ' | Costuri: ' + sumaCosturi.toFixed(2) + ' lei';
+      }
+    }
+  </script>
+</body>
+</html>
