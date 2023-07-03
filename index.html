@@ -35,6 +35,7 @@ select {
 
 button {
   padding: 10px;
+  
 }
 
 #result {
@@ -53,14 +54,43 @@ li {
 
 #result > button {
   margin-bottom: 15px;
-  transition-duration: 0.4s;
 }
 
-#result > button:hover {
-  background-color: #4CAF50; /* Green */
-  color: white;
+.button-24 {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
 }
 
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-24:active {
+  opacity: .5;
+}
 
 @media only screen and (max-width: 480px) {
   .container {
@@ -102,7 +132,7 @@ li {
     <label for="data">Data achiziției:</label>
     <input type="date" id="data">
   </div>
-<button onclick="calculeaza()">Calculează</button>
+<button button class="button-24" role="button" onclick="calculeaza()">Calculează</button>
 
   <div id="result"></div>
   <div class="legenda">
