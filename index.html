@@ -209,6 +209,8 @@ li {
 
     var copyButton = document.createElement('button');
     copyButton.innerHTML = 'Copiază';
+	copyButton.classList.add('button-24');
+	copyButton.setAttribute('role', 'button');
     copyButton.style.marginLeft = '20px';
     copyButton.onclick = copyToClipboard;
     resultDiv.appendChild(copyButton);
