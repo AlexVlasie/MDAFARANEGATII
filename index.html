@@ -2,10 +2,15 @@
 <html>
 <head>
   <title>Calculator MDA - fara negatii</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;800&display=swap" rel="stylesheet">
   <style>
     body {
       background-image: url("back.jpg");
+	  font-family: 'Inter', sans-serif;
     }
+	
 
 label {
   background-color: #bbe4e9;
@@ -15,6 +20,7 @@ label {
 .container {
   width: 400px;
   margin: 50px auto;
+  margin-top: 0px;
 }
 
 .input-group {
@@ -32,6 +38,10 @@ select {
   width: 100%;
   padding: 5px;
 }
+
+	label {
+	font-family: 'Inter', sans-serif;
+	}
 
 button {
   padding: 10px;
@@ -92,6 +102,30 @@ li {
   opacity: .5;
 }
 
+footer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+h4 {
+	align-content: flex-end;
+}
+
+.titlu-final {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.Titlu-final1 {
+	color: white;
+	font-size: 25px;
+	align-content: center;
+}
+
+
+
 @media only screen and (max-width: 480px) {
   .container {
     width: 100%;
@@ -107,6 +141,9 @@ li {
   <meta name="author" content="Alex Vlasie">
 </head>
 <body>
+<div class="titlu-final">
+<h1 class="Titlu-final1">Calculator reparatii</h1>
+</div>
 <div class="container">
   <div class="input-group">
     <label for="piese">Cost piese (lei):</label>
@@ -145,6 +182,9 @@ li {
     </ul>
   </div>
 </div>
+<footer>
+<h4 style="color: white; font-size: 10px; font-weight: 0;">©Copyright Alex Vlasie 2023</h4>
+</footer>
 <script>
   function updateReparatiiValue() {
     var piese = parseFloat(document.getElementById('piese').value);
