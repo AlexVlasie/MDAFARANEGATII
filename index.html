@@ -181,10 +181,14 @@ h4 {
       <li>3 ani jumatate - 4 ani -> 100%</li>
     </ul>
   </div>
-</div>
-<footer>
+  
+ 
+  </div>
+  <footer>
 <h4 style="color: white; font-size: 10px; font-weight: 0;">©Copyright Alex Vlasie 2023</h4>
 </footer>
+</div>
+
 <script>
   function updateReparatiiValue() {
     var piese = parseFloat(document.getElementById('piese').value);
@@ -241,7 +245,7 @@ h4 {
     }
 
     var sumaCosturi = piese + manopera + transport;
-    resultDiv.innerHTML = 'Procent: ' + procentRotunjit + '% | Data: ' + data + ' | Perioada: ' + perioadaText;
+    resultDiv.innerHTML = 'Procent: ' + procentRotunjit + '% | Data:' + data + '| Perioada: ' + perioadaText;
 
     if (!isNaN(sumaCosturi)) {
       resultDiv.innerHTML += ' | Costuri: ' + sumaCosturi.toFixed(2) + ' lei';
@@ -273,7 +277,7 @@ h4 {
     textToCopy += 'Valoarea produsului: ' + produs + '\n';
     textToCopy += 'Data achiziției: ' + data + '\n';
     textToCopy += procent + '\n';
-    textToCopy += 'Perioada garantiala: ' + perioada;
+    textToCopy += perioada;
 
     navigator.clipboard.writeText(textToCopy)
       .then(function() {
