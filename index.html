@@ -154,14 +154,33 @@ h4 {
     width: 405px;
 }
 
+.input-group-freon {
+    margin-top: 100px;
+    margin-left: 120px;
+}
+
+.bossule {
+    margin-top: 0;
+}
+
+
+.wrapper {
+    display: grid;
+grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+
   </style>
   <meta name="author" content="Alex Vlasie">
 </head>
 <body>
 
-    <div class="wrapper">
+<div class="wrapper">
        
+
         <div class="input-group-freon">
+            <div><h1 style="font-size: 23px; color: white; margin-bottom: 4px;">Calculator freon</h1></div>
             <div class="label-freon">
               <div>
                 <label for="cantitate-freon" style="width: 170px;">Cantitate Freon (g):</label>
@@ -174,7 +193,8 @@ h4 {
                 </div>
             <div id="result-freon" style="color: white; font-weight: 30";></div>
             <button id= "co" class="button-24" onclick="copyCantitateFreonToClipboard()">Copiază</button>
-          </div>
+        </div>
+
           
 
 
