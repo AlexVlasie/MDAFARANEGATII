@@ -9,6 +9,7 @@
     body {
       background-image: url("back.jpg");
 	  font-family: 'Inter', sans-serif;
+      height: 100vh;
     }
 	
 
@@ -27,25 +28,30 @@ label {
   margin-bottom: 15px;
 }
 
+.label-freon {
+  background-color: #bbe4e9;
+  display: inline-block;
+  width: 200px;
+}
+
+.input-group-freon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.label-freon input[type="text"] {
+  width: 50px;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
   border-radius: 2px;
+  font-family: 'Inter', sans-serif;
 }
-
-input[type="text"],
-select {
-  width: 100%;
-  padding: 5px;
-}
-
-	label {
-	font-family: 'Inter', sans-serif;
-	}
 
 button {
   padding: 10px;
-  
 }
 
 #result {
@@ -124,8 +130,6 @@ h4 {
 	align-content: center;
 }
 
-
-
 @media only screen and (max-width: 480px) {
   .container {
     width: 100%;
@@ -137,39 +141,75 @@ h4 {
   color: white;
   font-size: 1.1rem;
 }
+
+#co {
+    margin-top: 4px;
+}
+
+.label-freon {
+    border-radius: 6px;
+}
+
+.introd {
+    width: 405px;
+}
+
   </style>
   <meta name="author" content="Alex Vlasie">
 </head>
 <body>
+
+    <div class="wrapper">
+       
+        <div class="input-group-freon">
+            <div class="label-freon">
+              <div>
+                <label for="cantitate-freon" style="width: 170px;">Cantitate Freon (g):</label>
+            </div>
+              
+                <div>
+                    <input type="text" id="cantitate-freon" oninput="calculeazaCantitateFreon()">
+                </div>
+            
+                </div>
+            <div id="result-freon" style="color: white; font-weight: 30";></div>
+            <button id= "co" class="button-24" onclick="copyCantitateFreonToClipboard()">Copiază</button>
+          </div>
+          
+
+
+
+<div class="bossule">
 <div class="titlu-final">
 <h1 class="Titlu-final1">Calculator reparatie</h1>
 </div>
 <div class="container">
   <div class="input-group">
     <label for="piese">Cost piese (lei):</label>
-    <input type="text" id="piese" oninput="updateReparatiiValue()">
+    <input  class="introd"  type="text" id="piese" oninput="updateReparatiiValue()">
   </div>
   <div class="input-group">
     <label for="manopera">Cost manopera (lei):</label>
-    <input type="text" id="manopera" oninput="updateReparatiiValue()">
+    <input class="introd" type="text" id="manopera" oninput="updateReparatiiValue()">
   </div>
   <div class="input-group">
     <label for="transport">Cost transport (lei):</label>
-    <input type="text" id="transport" oninput="updateReparatiiValue()">
+    <input class="introd"  type="text" id="transport" oninput="updateReparatiiValue()">
   </div>
   <div class="input-group">
     <label for="reparatii">Valoarea reparatiei (lei):</label>
-    <input type="text" id="reparatii" readonly>
+    <input class="introd"  type="text" id="reparatii" readonly>
   </div>
   <div class="input-group">
     <label for="produs">Valoarea produsului (lei):</label>
-    <input type="text" id="produs">
+    <input class="introd"  type="text" id="produs">
   </div>
   <div class="input-group">
     <label for="data">Data achizitiei:</label>
     <input type="date" id="data">
   </div>
-<button button class="button-24" role="button" onclick="calculeaza()">Calculeaza</button>
+ 
+  <button button class="button-24" role="button" onclick="calculeaza()">Calculeaza</button>
 
   <div id="result"></div>
   <div class="legenda">
@@ -181,13 +221,12 @@ h4 {
       <li>3 ani jumatate - 4 ani -> 100%</li>
     </ul>
   </div>
-  
- 
-  </div>
-  <footer>
-<h4 style="color: white; font-size: 10px; font-weight: 0;">©Copyright Alex Vlasie 2023</h4>
-</footer>
 </div>
+</div>
+</div>
+<footer>
+  <h4 style="color: white; font-size: 10px; font-weight: 0;">© Drepturi de autor Alex Vlasie 2023</h4>
+</footer>
 
 <script>
   function updateReparatiiValue() {
@@ -253,12 +292,49 @@ h4 {
 
     var copyButton = document.createElement('button');
     copyButton.innerHTML = 'Copiază';
-	copyButton.classList.add('button-24');
-	copyButton.setAttribute('role', 'button');
+    copyButton.classList.add('button-24');
+    copyButton.setAttribute('role', 'button');
     copyButton.style.marginLeft = '20px';
     copyButton.onclick = copyToClipboard;
     resultDiv.appendChild(copyButton);
   }
+
+  function calculeazaCantitateFreon() {
+    var cantitateFreon = parseFloat(document.getElementById('cantitate-freon').value);
+
+    if (isNaN(cantitateFreon)) {
+      document.getElementById('result-freon').innerHTML = '';
+      return;
+    }
+
+    var costFreon = (cantitateFreon / 200) * 145;
+    document.getElementById('result-freon').innerHTML = 'Cost Freon: ' + costFreon.toFixed(2) + ' lei';
+  }
+
+  function copyCantitateFreonToClipboard() {
+  var cantitateFreonInput = document.getElementById('cantitate-freon');
+
+  if (cantitateFreonInput.value === '') {
+    cantitateFreonInput.style.borderColor = 'red';
+    cantitateFreonInput.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
+    cantitateFreonInput.placeholder = 'Introdu o cantitate';
+    cantitateFreonInput.style.color = 'red';
+    return;
+  }
+
+  var textToCopy = cantitateFreonInput.value;
+
+  navigator.clipboard.writeText(textToCopy)
+    .then(function() {
+      alert('Am copiat tot boss.');
+    })
+    .catch(function() {
+      alert('Mai încearcă odată.');
+    });
+}
+
+
+
 
   function copyToClipboard() {
     var piese = document.getElementById('piese').value;
