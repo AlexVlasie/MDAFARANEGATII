@@ -373,7 +373,8 @@ grid-template-columns: 1fr 3fr 1fr;
     textToCopy += 'Valoarea produsului: ' + produs + '\n';
     textToCopy += 'Data achiziției: ' + data + '\n';
     textToCopy += procent + '\n';
-    textToCopy += perioada;
+    textToCopy += perioada + '\n';
+	textToCopy += 'Preturi exprimate in lei fara TVA';
 
     navigator.clipboard.writeText(textToCopy)
       .then(function() {
