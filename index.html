@@ -240,6 +240,7 @@ grid-template-columns: 1fr 3fr 1fr;
         <button button class="button-24" role="button" onclick="calculeaza()">Calculeaza</button>
 
         <div id="result"></div>
+
         <div class="legenda">
           <ul>
             <li>1 an - 2 ani -> 50%</li>
@@ -312,19 +313,19 @@ grid-template-columns: 1fr 3fr 1fr;
       }
 
       var sumaCosturi = piese + manopera + transport;
-      resultDiv.innerHTML = 'Procent: ' + procentRotunjit + '% | Data:' + data + '| Perioada: ' + perioadaText;
+      resultDiv.innerHTML = 'Procent: ' + procentRotunjit + '% | Data: ' + data + '| Perioada: ' + perioadaText;
 
       if (!isNaN(sumaCosturi)) {
         resultDiv.innerHTML += ' | Costuri: ' + sumaCosturi.toFixed(2) + ' lei';
       }
 
-      var copyButton = document.createElement('button');
-      copyButton.innerHTML = 'Copiază';
-      copyButton.classList.add('button-24');
-      copyButton.setAttribute('role', 'button');
-      copyButton.style.marginLeft = '20px';
-      copyButton.onclick = copyToClipboard;
-      resultDiv.appendChild(copyButton);
+    //   var copyButton = document.createElement('button');
+    //   copyButton.innerHTML = 'Copiaza';
+    //   copyButton.classList.add('button-24');
+    //   copyButton.setAttribute('role', 'button');
+    //   copyButton.style.marginLeft = '20px';
+    //   copyButton.onclick = copyToClipboard();
+    //   resultDiv.appendChild(copyButton);
 
       // Adăugăm verificările pentru intervalul de vârstă și procentaj
       var reparatieEconomica = false;
@@ -354,7 +355,7 @@ grid-template-columns: 1fr 3fr 1fr;
       if (reparatieEconomica) {
         resultDiv.innerHTML += ' | <span class="reparatie-economica">Reparatie economica</span>';
       } else {
-        resultDiv.innerHTML += ' | <span class="reparatie-neeconomica">Reparație neeconomică</span>';
+        resultDiv.innerHTML += ' | <span class="reparatie-neeconomica">Reparatie neeconomica</span>';
       }
     }
 
@@ -381,42 +382,57 @@ grid-template-columns: 1fr 3fr 1fr;
         return;
       }
 
-      var textToCopy = cantitateFreonInput.innerHTML;
+      var cantitateFreon = parseFloat(document.getElementById('cantitate-freon').value);
+      var textToCopy = (cantitateFreon / 200) * 145;
+          textToCopy = textToCopy.toFixed(2);
+
 
       navigator.clipboard.writeText(textToCopy)
+        .then(function() {
+            alert('Cost freon copiat!')
+        })
         .catch(function() {
-          alert('Mai încearcă odată.');
+          alert('Mai încearcă odata.');
         });
     }
 
     function copyToClipboard() {
-      var piese = document.getElementById('piese').value;
-      var manopera = document.getElementById('manopera').value;
-      var transport = document.getElementById('transport').value;
-      var reparatii = document.getElementById('reparatii').value;
-      var produs = document.getElementById('produs').value;
-      var data = document.getElementById('data').value;
-      var procent = document.getElementById('result').innerHTML.split('|')[0];
-      var perioada = document.getElementById('result').innerHTML.split('|')[2];
+  var piese = document.getElementById('piese').value;
+  var manopera = document.getElementById('manopera').value;
+  var transport = document.getElementById('transport').value;
+  var reparatii = document.getElementById('reparatii').value;
+  var produs = document.getElementById('produs').value;
+  var data = document.getElementById('data').value;
+  var procent = document.getElementById('result').textContent.split('|')[0].trim();
+  var perioada = document.getElementById('result').textContent.split('|')[2].trim();
 
-      var textToCopy = 'Cost piese: ' + piese + '\n';
-      textToCopy += 'Cost manoperă: ' + manopera + '\n';
-      textToCopy += 'Cost transport: ' + transport + '\n';
-      textToCopy += 'Valoarea reparației: ' + reparatii + '\n';
-      textToCopy += 'Valoarea produsului: ' + produs + '\n';
-      textToCopy += 'Data achiziției: ' + data + '\n';
-      textToCopy += procent + '\n';
-      textToCopy += perioada + '\n';
-      textToCopy += 'Preturi exprimate in lei fara TVA';
+  var reparatieEconomica = document.querySelector('.reparatie-economica') !== null;
 
-      navigator.clipboard.writeText(textToCopy)
-	      .then(function() {
-      alert('Informațiile au fost copiate în clipboard cu succes.');
+  var textToCopy = 'Cost piese: ' + piese + '\n';
+  textToCopy += 'Cost manoperă: ' + manopera + '\n';
+  textToCopy += 'Cost transport: ' + transport + '\n';
+  textToCopy += 'Valoarea reparației: ' + reparatii + '\n';
+  textToCopy += 'Valoarea produsului: ' + produs + '\n';
+  textToCopy += 'Data achiziției: ' + data + '\n';
+  textToCopy +=  procent + '\n';
+  textToCopy +=  perioada + '\n';
+
+  if (reparatieEconomica) {
+    textToCopy += 'Reparatie: Economica\n';
+  } else {
+    textToCopy += 'Reparatie: Neeconomica\n';
+  }
+
+  textToCopy += 'Preturi exprimate in lei fara TVA';
+
+  navigator.clipboard.writeText(textToCopy)
+    .then(function() {
+      alert('Cost reparatie copiat!');
     })
-        .catch(function() {
-          alert('Eroare la copierea informațiilor în clipboard.');
-        });
-    }
+    .catch(function() {
+      alert('Eroare la copierea informațiilor în clipboard.');
+    });
+}
   </script>
 </body>
 </html>
