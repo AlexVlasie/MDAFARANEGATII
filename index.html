@@ -6,7 +6,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;800&family=Open+Sans:ital,wght@0,300;0,500;1,500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="favicon.png">
-
   <style>
     body {
       background-image: url("back.jpg");
@@ -205,7 +204,7 @@ grid-template-columns: 1fr 3fr 1fr;
         </div>
       </div>
       <div id="result-freon" style="color: white; font-weight: 30";></div>
-      <button id= "co" class="button-24" onclick="copyCantitateFreonToClipboard()">Copiază</button>
+      <button id= "co" class="button-24" onclick="copyCantitateFreonToClipboard()">Copiaza</button>
     </div>
 
     <div class="bossule">
@@ -238,7 +237,7 @@ grid-template-columns: 1fr 3fr 1fr;
           <input type="date" id="data">
         </div>
 
-        <button button class="button-24" role="button" onclick="calculeaza()">Calculeaza</button>
+        <button button class="button-24" role="button" onclick="calculeazaSiCopiaza()">Calculeaza</button>
 
         <div id="result"></div>
 
@@ -277,7 +276,7 @@ grid-template-columns: 1fr 3fr 1fr;
       var data = document.getElementById('data').value;
 
       if (isNaN(reparatii) || isNaN(produs) || isNaN(piese) || isNaN(manopera) || isNaN(transport)) {
-        alert('Te rog introdu valori numerice valide pentru câmpurile de costuri și valoarea produsului.');
+        alert('Te rog introdu valori numerice valide pentru campurile de costuri si valoarea produsului.');
         return;
       }
 
@@ -293,7 +292,7 @@ grid-template-columns: 1fr 3fr 1fr;
 
       var perioadaText = '';
       if (totalMonthsDiff === 1) {
-        perioadaText = '1 lună';
+        perioadaText = '1 luna';
       } else if (totalMonthsDiff > 1) {
         var years = Math.floor(totalMonthsDiff / 12);
         var months = totalMonthsDiff % 12;
@@ -301,15 +300,15 @@ grid-template-columns: 1fr 3fr 1fr;
         if (years === 1 && months === 0) {
           perioadaText = '1 an';
         } else if (years === 1 && months === 1) {
-          perioadaText = '1 an și 1 lună';
+          perioadaText = '1 an si 1 luna';
         } else if (years === 1 && months > 1) {
-          perioadaText = '1 an și ' + months + ' luni';
+          perioadaText = '1 an si ' + months + ' luni';
         } else if (years > 1 && months === 0) {
           perioadaText = years + ' ani';
         } else if (years > 1 && months === 1) {
-          perioadaText = years + ' ani și 1 lună';
+          perioadaText = years + ' ani si 1 luna';
         } else {
-          perioadaText = years + ' ani și ' + months + ' luni';
+          perioadaText = years + ' ani si ' + months + ' luni';
         }
       }
 
@@ -328,7 +327,7 @@ grid-template-columns: 1fr 3fr 1fr;
     //   copyButton.onclick = copyToClipboard();
     //   resultDiv.appendChild(copyButton);
 
-      // Adăugăm verificările pentru intervalul de vârstă și procentaj
+      // Adaugam verificarile pentru intervalul de vârsta și procentaj
       var reparatieEconomica = false;
 
       if (totalMonthsDiff <= 12 && totalMonthsDiff <= 24) {
@@ -393,9 +392,15 @@ grid-template-columns: 1fr 3fr 1fr;
             alert('Cost freon copiat!')
         })
         .catch(function() {
-          alert('Mai încearcă odata.');
+          alert('Mai incearca odata.');
         });
     }
+
+
+    function calculeazaSiCopiaza() {
+    calculeaza(); // Apeleaza functia pentru calcul
+    copyToClipboard(); // Apeleaza functia pentru copiere
+  }
 
     function copyToClipboard() {
   var piese = document.getElementById('piese').value;
@@ -409,12 +414,12 @@ grid-template-columns: 1fr 3fr 1fr;
 
   var reparatieEconomica = document.querySelector('.reparatie-economica') !== null;
 
-  var textToCopy = 'Cost piese: ' + piese + '\n';
-  textToCopy += 'Cost manoperă: ' + manopera + '\n';
-  textToCopy += 'Cost transport: ' + transport + '\n';
-  textToCopy += 'Valoarea reparației: ' + reparatii + '\n';
-  textToCopy += 'Valoarea produsului: ' + produs + '\n';
-  textToCopy += 'Data achiziției: ' + data + '\n';
+  var textToCopy = 'Cost piese: ' + piese + ' lei' + '\n';
+  textToCopy += 'Cost manopera: ' + manopera + ' lei' + '\n';
+  textToCopy += 'Cost transport: ' + transport + ' lei' + '\n';
+  textToCopy += 'Valoarea reparatiei: ' + reparatii + ' lei' + '\n';
+  textToCopy += 'Valoarea produsului: ' + produs + ' lei' + '\n';
+  textToCopy += 'Data achizitiei: ' + data + '\n';
   textToCopy +=  procent + '\n';
   textToCopy +=  perioada + '\n';
 
@@ -431,7 +436,7 @@ grid-template-columns: 1fr 3fr 1fr;
       alert('Cost reparatie copiat!');
     })
     .catch(function() {
-      alert('Eroare la copierea informațiilor în clipboard.');
+      alert('Eroare la copierea informatiilor in clipboard.');
     });
 }
   </script>
