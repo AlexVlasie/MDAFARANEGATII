@@ -411,6 +411,9 @@ grid-template-columns: 1fr 3fr 1fr;
       textToCopy += 'Preturi exprimate in lei fara TVA';
 
       navigator.clipboard.writeText(textToCopy)
+	      .then(function() {
+      alert('Informațiile au fost copiate în clipboard cu succes.');
+    })
         .catch(function() {
           alert('Eroare la copierea informațiilor în clipboard.');
         });
